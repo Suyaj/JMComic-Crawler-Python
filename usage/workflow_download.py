@@ -59,7 +59,7 @@ def main():
     photo_id_set = get_id_set('JM_PHOTO_IDS', jm_photos)
 
     ids = get_id_search()
-    ids.append(list(album_id_set))
+    ids.extend(list(album_id_set))
 
     helper = JmcomicUI()
     helper.album_id_list = ids
