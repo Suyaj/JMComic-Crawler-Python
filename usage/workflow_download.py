@@ -40,12 +40,29 @@ def get_id_set(env_name, given):
     return aid_set
 
 
+def get_id_search():
+    ids = []
+    search = env('JM_SEARCH', '')
+    if search is None:
+        return ids
+    client = JmOption.default().new_jm_client()
+    page = client.search_site(search_query=search, page=1)
+    for i in range(0, len(page.content)):
+        album = page.getindex(i)
+        album_id, album_name = album
+        ids.append(album_id)
+    return ids
+
+
 def main():
     album_id_set = get_id_set('JM_ALBUM_IDS', jm_albums)
     photo_id_set = get_id_set('JM_PHOTO_IDS', jm_photos)
 
+    ids = get_id_search()
+    ids.append(list(album_id_set))
+
     helper = JmcomicUI()
-    helper.album_id_list = list(album_id_set)
+    helper.album_id_list = ids
     helper.photo_id_list = list(photo_id_set)
 
     option = get_option()
