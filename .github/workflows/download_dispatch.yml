@@ -13,6 +13,11 @@ on:
         description: 章节id（单独下载章节，多个id同上）
         required: false
 
+      JM_SEARCH:
+        type: string
+        description: 搜索关键字
+        required: false
+
       CLIENT_IMPL:
         type: string
         description: 客户端类型（client.impl），下载失败时，你可以尝试填入此项重试。'api' 表示移动端，'html' 表示网页端。
@@ -72,6 +77,7 @@ jobs:
       # 工作流输入
       JM_ALBUM_IDS: ${{ github.event.inputs.JM_ALBUM_IDS }}
       JM_PHOTO_IDS: ${{ github.event.inputs.JM_PHOTO_IDS }}
+      JM_SEARCH: ${{ github.event.inputs.JM_SEARCH }}
       DIR_RULE: ${{ github.event.inputs.DIR_RULE }}
       CLIENT_IMPL: ${{ github.event.inputs.CLIENT_IMPL }}
       ZIP_NAME: ${{ github.event.inputs.ZIP_NAME }}
